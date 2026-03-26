@@ -40,17 +40,27 @@ var bosses = [{
 
 btn.addEventListener("click", function () {
   let value = inp.value;
-  
+  let found = false;
+
   bosses.forEach(boss => {
     if (boss.forNavn === value) {
-        console.log(boss.forNavn);
-        
-        document.getElementById("forNavn").innerText = boss.forNavn
-        document.getElementById("etterNavn").innerText = boss.etterNavn
-        document.getElementById("bildet").src = boss.bildet
-        document.getElementById("stilling").innerText = boss.stilling
-        document.getElementById("info").innerText = boss.info
-        console.log(document.getElementById("bildet"));
+      found = true;
+
+      document.getElementById("forNavn").innerText = boss.forNavn
+      document.getElementById("etterNavn").innerText = boss.etterNavn || ""
+      document.getElementById("bildet").src = boss.bildet
+      document.getElementById("stilling").innerText = boss.stilling
+      document.getElementById("info").innerText = boss.info
     }
   });
-})
+
+  if (!found) {
+    alert("This character doesn't exist");
+  }
+});
+
+inp.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        btn.click()
+    }
+});
